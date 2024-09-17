@@ -31,7 +31,7 @@ public class CustomerController {
 
 
     @GetMapping("/{query}")
-    public ResponseEntity<?>searchCustomer(@PathVariable("query")String q){
+    public ResponseEntity<?>searchCustomer(@PathVariable String q){
         List<Customer>customers=customerService.searchCustomer(q);
 
 
