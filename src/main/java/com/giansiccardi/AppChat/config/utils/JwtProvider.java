@@ -19,10 +19,12 @@ public class JwtProvider {
 
     public static String generateToken(Authentication auth){
         Collection<? extends GrantedAuthority> authorities=auth.getAuthorities();
+        String roles=populateAuthorities(authorities);
         String jwt=Jwts.builder()
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime()+8640000))
                 .claim("email",auth.getName())
+                .claim("authorities",roles)
                 .signWith(key)
                 .compact();
         return jwt;

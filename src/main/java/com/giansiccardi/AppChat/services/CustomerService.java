@@ -51,9 +51,8 @@ public class CustomerService {
         if(userDetails==null){
             throw new BadCredentialsException("Email invaldio");
         }
-        if(!password.equals(userDetails.getPassword())){
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Contraseña incorrecta");
-
         }
         return new UsernamePasswordAuthenticationToken(userDetails,password,userDetails.getAuthorities());
     }
@@ -95,6 +94,9 @@ public class CustomerService {
         }
         if(req.profile_picture()!=null){
             customer.setProfile_picture(req.profile_picture());
+        }
+        if(req.phoNumber()!=null){
+            customer.setPhoneNumber(req.phoNumber());
         }
 
         return customer;

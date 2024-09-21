@@ -1,10 +1,12 @@
 package com.giansiccardi.AppChat.services;
 
 
+import com.giansiccardi.AppChat.enums.Authoriry;
 import com.giansiccardi.AppChat.repository.CustomerReposityroy;
 import com.giansiccardi.AppChat.models.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,8 +31,8 @@ private final CustomerReposityroy customerReposityroy;
        }
 
         List<GrantedAuthority> authorityList= new ArrayList<>();
-
-        User userDetails= new User(user.getEmail(),user.getPassword(),null);
+        authorityList.add(new SimpleGrantedAuthority(Authoriry.USER.name()));
+        User userDetails= new User(user.getEmail(),user.getPassword(),authorityList);
 
         return userDetails;
     }

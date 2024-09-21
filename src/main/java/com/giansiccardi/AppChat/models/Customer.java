@@ -1,6 +1,7 @@
 package com.giansiccardi.AppChat.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.giansiccardi.AppChat.enums.Authoriry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -33,6 +34,8 @@ public class Customer {
     @NotEmpty(message = "Password cannot be empty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    private Authoriry authoriry=Authoriry.USER;
 
 
 }

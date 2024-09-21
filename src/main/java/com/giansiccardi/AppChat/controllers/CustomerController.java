@@ -21,6 +21,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<?>getCustomerProfile(@RequestHeader("Authorization")String token) throws Exception {
+
         Customer customer=customerService.findCustomerByToken(token);
 
         if(customer==null){
