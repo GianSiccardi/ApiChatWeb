@@ -24,6 +24,7 @@ public class Message {
     private Customer customer;
 
     @ManyToOne
+    @JoinColumn(name = "chat_id")
     private Chat chat;
 
 

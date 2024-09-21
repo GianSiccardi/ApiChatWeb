@@ -25,6 +25,7 @@ public class Chat {
     @Column(name="is_group")
     private boolean isGroup;
 
+    @ManyToMany
     private Set<Customer>admins= new HashSet<>();
 
     @ManyToOne
@@ -33,7 +34,7 @@ public class Chat {
     @ManyToMany
     private Set<Customer> customers= new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private List<Message> messageList= new ArrayList<>();
 
 }
