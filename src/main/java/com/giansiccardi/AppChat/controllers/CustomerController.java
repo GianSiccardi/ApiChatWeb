@@ -31,12 +31,10 @@ public class CustomerController {
     }
 
 
-    @GetMapping("/{query}")
-    public ResponseEntity<?>searchCustomer(@PathVariable String q){
-        List<Customer>customers=customerService.searchCustomer(q);
-
-
-        return new ResponseEntity<List<Customer>>(customers,HttpStatus.OK);
+    @GetMapping("/search")
+    public ResponseEntity<?> searchCustomer(@RequestParam("q") String query) {
+        List<Customer> customers = customerService.searchCustomer(query);
+        return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
     }
 
     @PutMapping
