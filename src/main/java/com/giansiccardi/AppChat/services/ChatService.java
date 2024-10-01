@@ -30,7 +30,7 @@ public class ChatService {
        chat.getCustomers().add(customer);
        chat.getCustomers().add(reqCustomer);
        chat.setGroup(false);
-       return chat;
+        return chatRepositroy.save(chat);
     }
 
     public Chat findByChatByID(Long chatId) throws Exception {

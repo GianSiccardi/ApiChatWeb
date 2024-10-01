@@ -58,13 +58,12 @@ public class ChatController {
     }
 
     @GetMapping("/customer")
-    public ResponseEntity<?>findiAllchatByCustomer(@PathVariable Long id, @RequestHeader("Authorization") String jwt) throws Exception {
+    public ResponseEntity<?>findiAllchatByCustomer( @RequestHeader("Authorization") String jwt) throws Exception {
         Customer reqCustomer=customerService.findCustomerByToken(jwt);
 
 
         List<Chat>chats=chatService.findAllChatByCustomerId(reqCustomer.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(chats);
-
+        return ResponseEntity.status(HttpStatus.OK).body(chats);
     }
     @PutMapping("/{chatId}/add/{customerId}")
     public ResponseEntity<?>addCustomerToGroup(@PathVariable Long chatId ,@PathVariable Long customerId, @RequestHeader("Authorization") String jwt) throws Exception {
