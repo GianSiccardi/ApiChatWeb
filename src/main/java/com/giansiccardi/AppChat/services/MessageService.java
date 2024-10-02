@@ -31,7 +31,7 @@ public Message sendMessage(SendMessageRequest sendMessageRequest) throws Excepti
     message.setContent(sendMessageRequest.content());
     message.setTimestamp(LocalDateTime.now());
 
-    return message;
+    return messageRepository.save(message);
 }
 
 public List<Message>getChatMessages(Long id ,Customer reqCustomer) throws Exception {
