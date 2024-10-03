@@ -63,7 +63,7 @@ public class ChatController {
 
 
         List<Chat>chats=chatService.findAllChatByCustomerId(reqCustomer.getId());
-        return ResponseEntity.status(HttpStatus.OK).body(chats);
+        return ResponseEntity.ok(chats);
     }
     @PutMapping("/{chatId}/add/{customerId}")
     public ResponseEntity<?>addCustomerToGroup(@PathVariable Long chatId ,@PathVariable Long customerId, @RequestHeader("Authorization") String jwt) throws Exception {

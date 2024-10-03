@@ -1,6 +1,7 @@
 package com.giansiccardi.AppChat.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Chat {
     @ManyToMany
     private Set<Customer> customers= new HashSet<>();
 
+    @JsonManagedReference//Indica que esta propiedad debe ser serializada, y Jackson gestiona su serialización normalmente. En un contexto de relación de "uno a muchos", se coloca en el lado "uno".
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private List<Message> messageList= new ArrayList<>();
 
