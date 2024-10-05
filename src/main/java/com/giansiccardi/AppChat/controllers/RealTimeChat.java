@@ -5,7 +5,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class RealTimeChat {
 
 
@@ -18,5 +20,11 @@ public class RealTimeChat {
 
         simpMessagingTemplate.convertAndSend("/group"+message.getChat().getId().toString(),message);
         return message;
+    }
+
+    @MessageMapping("/single-message")
+    public void receiveSingleMessage(@Payload Message message) {
+
+        simpMessagingTemplate.convertAndSend("/single-chat/" + message.getChat().getId().toString(), message);
     }
 }

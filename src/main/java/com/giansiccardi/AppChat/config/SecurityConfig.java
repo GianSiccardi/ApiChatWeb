@@ -30,7 +30,7 @@ public class SecurityConfig {
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.sessionManagement(managment->managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(Authorize->Authorize.requestMatchers("/auth/register" ,"auth/login").permitAll()
+            .authorizeHttpRequests(Authorize->Authorize.requestMatchers("/auth/register" ,"auth/login","/ws/**").permitAll()
                     .anyRequest()
                     .authenticated()
             )
@@ -43,6 +43,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
     private CorsConfigurationSource corsConfigurationSource() {
         return request -> {
             CorsConfiguration cfg = new CorsConfiguration();
+
             cfg.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000")); // Orígenes permitidos
             cfg.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Métodos permitidos
             cfg.setAllowCredentials(true); // Permitir el uso de credenciales (cookies, autorizaciones)
