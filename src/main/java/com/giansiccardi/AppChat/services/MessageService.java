@@ -7,6 +7,7 @@ import com.giansiccardi.AppChat.models.Customer;
 import com.giansiccardi.AppChat.models.Message;
 import com.giansiccardi.AppChat.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,8 +21,10 @@ public class MessageService {
     private final MessageRepository messageRepository;
     private final CustomerService customerService;
     private final ChatService chatService;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
-public Message sendMessage(SendMessageRequest sendMessageRequest) throws Exception {
+
+    public Message sendMessage(SendMessageRequest sendMessageRequest) throws Exception {
     Customer customer=customerService.findCustomerById(sendMessageRequest.customerId());
     Chat chat=chatService.findByChatByID(sendMessageRequest.chatId());
 
@@ -31,8 +34,10 @@ public Message sendMessage(SendMessageRequest sendMessageRequest) throws Excepti
     message.setContent(sendMessageRequest.content());
     message.setTimestamp(LocalDateTime.now());
 
-    return messageRepository.save(message);
-}
+        Message savedMessage = messageRepository.save(message);
+        simpMessagingTemplate.convertAndSend("/topic/message", savedMessage);
+    return  savedMessage;
+    }
 
 public List<Message>getChatMessages(Long id ,Customer reqCustomer) throws Exception {
 

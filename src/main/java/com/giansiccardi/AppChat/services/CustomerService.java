@@ -30,6 +30,19 @@ public class CustomerService {
         return new BCryptPasswordEncoder();
     }
 
+    /*public void encriptar(){
+        List<Customer>usuarios=customerRepository.findAll();
+
+        for(Customer customer : usuarios){
+            String password=customer.getPassword();
+            String passwordEncryp=passwordEncoder.encode(password);
+            customer.setPassword(passwordEncryp);
+            customerRepository.save(customer);
+        }
+    }*/
+
+
+
     public Customer registerCustomer (Customer customer) throws Exception {
 
 
